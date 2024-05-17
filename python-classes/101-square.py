@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""Define square by size and position."""
+
+
 class Square:
     """Represent a square."""
 

@@ -54,21 +54,3 @@ class Square:
         for _ in range(self.__size):
             print("_" * self.__position[0], end="")
             print("#" * self.__size)
-
-
-# Test the Square class
-if __name__ == "__main__":
-    my_square = Square(5, (0, 0))
-    my_square.my_print()
-
-    print("--")
-
-    my_square.size = 5
-    my_square.position = (4, 1)
-    my_square.my_print()
-
-    print("--")
-
-    my_square.size = 0
-    my_square.position = (3, 2)
-    my_square.my_print()

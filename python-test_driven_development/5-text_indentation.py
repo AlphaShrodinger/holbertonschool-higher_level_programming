@@ -3,23 +3,19 @@
 
 
 def text_indentation(text):
-    if not isinstance(text, str):
+    """indents a text"""
+    e = "text_indentation() missing 1 required positional argument: 'text'"
+    if text is None:
+        raise TypeError(e)
+    if type(text) is not str:
         raise TypeError("text must be a string")
-
-    special_chars = ['.', '?', ':']
-    line = ""
-
-    for char in text:
-        line += char
-        if char in special_chars:
-            print(line.strip())
-            print()
-            line = ""
-
-    if line:
-        print(line.strip())
-
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testfile("tests/5-text_indentation.txt")
+    if not text:
+        raise TypeError("Text is empty")
+    c = 0
+    while c < len(text):
+        print(text[c], end="")
+        if text[c] in ".?:":
+            print("\n")
+            while c + 1 < len(text) and text[c + 1] == " ":
+                c += 1
+        c += 1

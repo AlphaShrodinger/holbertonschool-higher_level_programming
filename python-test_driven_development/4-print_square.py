@@ -4,13 +4,14 @@
 
 def print_square(size):
     """prints a square"""
-    if not isinstance(size, int):
-        raise TypeError('size must be an integer')
+    e = "unsupported operand type(s) for +: 'NoneType' and 'int'"
+    if size is None:
+        raise TypeError(e)
+    if type(size) is not int:
+        raise TypeError("size must be an integer")
     if size < 0:
-        raise ValueError('size must be >= 0')
-
-    if size == 0:
-        return
-
-    for _ in range(size):
-        print('#' * size)
+        raise ValueError("size must be >= 0")
+    if type(size) is float and type(size) < 0:
+        raise TypeError("size must be an integer")
+    for i in range(size):
+        print("#" * size)

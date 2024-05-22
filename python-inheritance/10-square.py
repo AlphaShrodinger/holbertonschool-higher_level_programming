@@ -1,42 +1,23 @@
 #!/usr/bin/python3
-"""Rectangle"""
+"""Square"""
 
 
-class BaseGeometry:
-    """Raise exception"""
-
-    def area(self):
-        raise Exception("area() is not implemented")
-
-    def integer_validator(self, name, value):
-        """Validates integer"""
-        if type(value) is not int:
-            raise TypeError("{} must be an integer".format(name))
-        if value <= 0:
-            raise ValueError("{} must be greater than 0".format(name))
-
-
-class Rectangle(BaseGeometry):
-    """Writes a rectangle"""
-
-    def __init__(self, width, height):
-        """Validates width and height"""
-        self.integer_validator("width", width)
-        self.integer_validator("height", height)
-        self.__width = width
-        self.__height = height
-
-    def __str__(self):
-        return "[Rectangle] {:d}/{:d}".format(self.__width, self.__height)
-
-    def area(self):
-        return self.__height * self.__width
+Rectangle = __import__('9-rectangle').Rectangle
 
 
 class Square(Rectangle):
-    """Square class"""
+    """Class Square"""
 
     def __init__(self, size):
+        """Instantiation of size"""
         self.integer_validator("size", size)
+        super().__init__(size, size)
         self.__size = size
-        super().__init__(self.__size, self.__size)
+
+    def __str__(self):
+        """Returns the square description"""
+        return "[Square] {}/{}".format(self.__size, self.__size)
+
+    def __repr__(self):
+        """Returns the square description"""
+        return "[Square] {}/{}".format(self.__size, self.__size)

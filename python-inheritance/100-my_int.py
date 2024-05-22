@@ -1,8 +1,10 @@
 #!/usr/bin/python3
-"""my int"""
+"""My int"""
 
 
 class MyInt(int):
+    """Inherits integer"""
+
     def __eq__(self, other):
         """Return True if self and other not equal, else false"""
         return int(self) != other

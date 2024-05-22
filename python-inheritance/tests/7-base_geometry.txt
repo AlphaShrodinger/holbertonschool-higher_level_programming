@@ -1,27 +1,40 @@
+The "7-base_geometry" doctest
+===========================
+This tests the 7-base_geometry class
+with different edge cases.
+
 >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
->>> BaseGeometry.integer_validator("width", 20)
+>>> bg = BaseGeometry()
 
->>> BaseGeometry.integer_validator("idk", 0)
-Traceback (most recent call last):
-ValueError: idk must be greater than 0
+>>> bg.integer_validator("my_int", 12)
+>>> print("{} is {}".format(bg.name, bg.value))
+my_int is 12
 
->>> BaseGeometry.integer_validator("width", 5, 4)
-Traceback (most recent call last):
-TypeError: integer_validator() takes 3 positional arguments but 4 were given
+>>> bg.integer_validator("width", 89)
+>>> print("{} is {}".format(bg.name, bg.value))
+width is 89
 
->>> BaseGeometry.integer_validator("Time", -32)
-Traceback (most recent call last):
-ValueError: Time must be greater than 0
+>>> try:
+...     bg.integer_validator("name", "John")
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] name must be an integer
 
->>> BaseGeometry.integer_validator("Life", 4.2)
-Traceback (most recent call last):
-TypeError: Life must be an integer
+>>> try:
+...     bg.integer_validator("age", 0)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] age must be greater than 0
 
->>> BaseGeometry.integer_validator("cat", "Maiq")
-Traceback (most recent call last):
-TypeError: cat must be an integer
+>>> try:
+...     bg.integer_validator("distance", -4)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] distance must be greater than 0
 
->>> BaseGeometry.integer_validator("width")
-Traceback (most recent call last):
-TypeError: integer_validator() missing 1 required positional argument: 'value'
+>>> try:
+...     bg.area()
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[Exception] area() is not implemented

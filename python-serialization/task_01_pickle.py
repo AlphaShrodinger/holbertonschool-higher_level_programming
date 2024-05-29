@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""python serialization task 1"""
+'''Pickle'''
 import pickle
 
 
 class CustomObject:
-    """class that defines a custom object"""
+    '''Class'''
 
     def __init__(self, name, age, is_student):
         self.name = name
@@ -12,12 +12,12 @@ class CustomObject:
         self.is_student = is_student
 
     def display(self):
-        """prints out the opbjects attrs"""
+        '''Display'''
         print("Name: {}\nAge: {}\nIs Student: {}".format(
             self.name, self.age, self.is_student))
 
     def serialize(self, filename):
-        """serialize current instance of object and save it to provided file"""
+        '''Serialized'''
         try:
             with open(filename, 'wb') as f:
                 pickle.dump(self, f)
@@ -26,7 +26,7 @@ class CustomObject:
 
     @classmethod
     def deserialize(cls, filename):
-        """load and return an instance of CustomObject from provided file"""
+        '''Deserialize'''
         try:
             with open(filename, 'rb') as f:
                 return pickle.load(f)

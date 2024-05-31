@@ -16,8 +16,7 @@ def home():
 
 @app.route('/data')
 def get_data():
-    usernames = list(users.keys())
-    return jsonify(usernames)
+    return jsonify(list(users.keys()))
 
 
 @app.route('/status')
@@ -37,9 +36,9 @@ def get_user(username):
 @app.route('/add_user', methods=['POST'])
 def add_user():
     data = request.get_json()
-    if data:
-        username = data.get('username')
-        if username:
+    if data and 'username' in data:
+        username = data['username']
+        if username not in users:
             new_user = {
                 "username": username,
                 "name": data.get('name'),
@@ -48,7 +47,10 @@ def add_user():
             }
             users[username] = new_user
             return jsonify({"message": "User added", "user": new_user}), 201
-    return jsonify({"error": "Invalid data provided"}), 400
+        else:
+            return jsonify({"error": "Username already exists"}), 400
+    else:
+        return jsonify({"error": "Invalid data provided"}), 400
 
 
 if __name__ == '__main__':

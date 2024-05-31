@@ -34,7 +34,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
                     "description": "A simple API built with http.server"}
             self.wfile.write(bytes(json.dumps(info), "utf-8"))
         else:
-            self.send_error(404, "Endpoint not found: {}".format(self.path))
+            self.send_error(404, "Endpoint not found")
 
 
 def run():

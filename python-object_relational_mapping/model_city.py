@@ -11,6 +11,7 @@ Base = declarative_base()
 
 
 class City(Base):
+    '''city class'''
 
     def __init(self):
         pass

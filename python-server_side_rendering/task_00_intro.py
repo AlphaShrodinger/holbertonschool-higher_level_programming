@@ -18,7 +18,7 @@ def generate_invitations(template, attendees):
         return []
 
     if not all(isinstance(attendee, dict) for attendee in attendees):
-        print("Error: The 'attendees' parameter must be a list of dictionaries.")
+        print("Error: The 'attendees' parameter must be a list.")
         return []
 
     generated_files = []

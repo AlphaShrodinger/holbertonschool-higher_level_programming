@@ -15,50 +15,38 @@ def product_display():
     source = request.args.get('source')
     product_id = request.args.get('id')
 
+    if source not in ['json', 'csv']:
+        error_message = 'Wrong source parameter. Use "json" or "csv".'
+        return render_template('product_display.html', error_message=error_message)
+
     if source == 'json':
         products_data = read_json_data('products.json')
     elif source == 'csv':
         products_data = read_csv_data('products.csv')
-    else:
-        return render_template('product_display.html', error_message="Wrong source parameter. Use 'json' or 'csv'.")
 
     if product_id:
         filtered_products = [
             product for product in products_data if product['id'] == product_id]
         if not filtered_products:
-            return render_template('product_display.html', error_message="Product not found with ID: {}".format(product_id))
-        else:
-            products_data = filtered_products
+            error_message = f'Product not found with ID: {product_id}'
+            return render_template('product_display.html', error_message=error_message)
+
+        products_data = filtered_products
 
     return render_template('product_display.html', products=products_data)
 
 
 def read_json_data(filename):
-    products_data = []
     with open(filename, 'r') as f:
         data = json.load(f)
-        for product in data:
-            products_data.append({
-                'id': product['id'],
-                'name': product['name'],
-                'category': product['category'],
-                'price': product['price']
-            })
-    return products_data
+    return data
 
 
 def read_csv_data(filename):
-    products_data = []
     with open(filename, 'r', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
-        for row in reader:
-            products_data.append({
-                'id': row['id'],
-                'name': row['name'],
-                'category': row['category'],
-                'price': row['price']
-            })
-    return products_data
+        data = list(reader)
+    return data
 
 
 if __name__ == '__main__':
